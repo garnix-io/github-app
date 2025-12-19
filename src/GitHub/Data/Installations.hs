@@ -7,11 +7,14 @@
 
 module GitHub.Data.Installations where
 
+import Control.DeepSeq.Generics (genericRnf)
+import Control.DeepSeq (NFData(..))
+import Data.Binary (Binary)
+import Data.Data (Data, Typeable)
+import GHC.Generics (Generic)
 import GitHub.Data.Apps (App)
 import GitHub.Data.Id (Id)
 import GitHub.Data.URL (URL)
-import GitHub.Internal.Prelude
-import Prelude ()
 
 
 data Installation = Installation
