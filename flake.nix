@@ -5,17 +5,20 @@
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import "${nixpkgs}" { inherit system; };
       in {
-        packages.default = pkgs.haskellPackages.callCabal2nix
-          "oauth2-simple" ./.
+        packages.default = pkgs.haskell.packages.ghc967.callCabal2nix
+          "github-app" ./.
           { };
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = [
             pkgs.ghcid
             pkgs.cabal-install
             pkgs.hpack
-            (pkgs.haskellPackages.ghc.withPackages (p:
+            (pkgs.haskell.packages.ghc967.ghc.withPackages (p:
               self.packages.${system}.default.getBuildInputs.haskellBuildInputs
             ))
+            (pkgs.haskell-language-server.override {
+              supportedGhcVersions = [ "967" ];
+            })
           ];
         };
       });

@@ -39,8 +39,11 @@ library:
   source-dirs: src
   dependencies:
     - aeson
+    - binary
     - bytestring
     - cryptonite
+    - deepseq
+    - deepseq-generics
     - github
     - http-client
     - http-client-tls
